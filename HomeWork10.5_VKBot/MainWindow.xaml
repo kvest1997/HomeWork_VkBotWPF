@@ -1,0 +1,84 @@
+﻿<Window x:Class="HomeWork10._5_VKBot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeWork10._5_VKBot"
+        mc:Ignorable="d"
+        Title="Vk Bot Skillbox" Height="450" Width="800"
+        MinHeight="350"
+        MinWidth="550"
+        MaxHeight="800"
+        MaxWidth="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="60*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="UsersList" Grid.RowSpan="1"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 Margin="5" SelectionChanged="UsersList_SelectionChanged"
+                 >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black"
+                            Margin="5"
+                            BorderThickness="1"
+                            CornerRadius="10">
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{Binding Path=FirstName}" 
+                                       Margin="0" 
+                                       FontSize="15"/>
+                            <TextBlock Text="{Binding Path=LastName}" 
+                                       Margin="0" 
+                                       FontSize="10"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button x:Name="updateBtn"
+                Click="updateBtn_Click"
+            Grid.Column="0"
+                Grid.Row="1"
+                Margin="5"
+                Content="Update and Save"/>
+
+        <Frame x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"
+               VerticalAlignment="Stretch"
+               HorizontalAlignment="Stretch" 
+               Grid.Row="0" 
+               Grid.Column="1"
+               Margin="10"
+               />
+
+        <GroupBox Grid.Column="1"
+                  Grid.Row="1"
+                  Header="Send Text"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock  x:Name="targetId"
+                    Grid.Column="0"
+                           Visibility="Hidden"
+                           Text="{Binding ElementName=UsersList, Path=SelectedItem.Id}"/>
+                <TextBox x:Name="txtMsgSend" Grid.Column="0"/>
+                <Button Grid.Column="1" Margin="2" Content="Send" Height="20" Click="Button_Click"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>
